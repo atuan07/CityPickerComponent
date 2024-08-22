@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/color_ffffff"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/wcsp_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/color_ffffff"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        app:titleMarginStart="16dp">
+
+        <ImageView
+            android:id="@+id/wcsp_img_back"
+            style="@style/Widget.AppCompat.ActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:scaleType="center"
+            android:src="@mipmap/cp_icon_back"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/wcsp_txt_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/cp_select_city"
+            android:textColor="#333333"
+            android:textSize="18sp" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/ll_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/wcsp_toolbar"
+        android:background="@color/color_ffffff">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/cp_search_box_bg"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:scaleType="center"
+                android:src="@mipmap/cp_ic_search"
+                tools:ignore="ContentDescription" />
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/cp_hint_search_box"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textColor="@color/color_8c8c8c"
+                android:textColorHint="@color/color_999999"
+                android:textSize="14sp"
+                android:textCursorDrawable="@color/color_999999"
+                tools:ignore="RtlHardcoded"
+                android:autofillHints="" />
+
+            <ImageView
+                android:id="@+id/iv_search_clear"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:src="@mipmap/cp_ic_search_clear"
+                android:visibility="gone"
+                tools:ignore="ContentDescription" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_current_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_search"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_current_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:drawableStart="@mipmap/cp_add"
+            android:drawablePadding="12dp"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:text="正在获取城市..."
+            android:textColor="#333333"
+            android:textSize="15sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_f4f5f6" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ll_current_city"
+        android:background="@color/color_f4f5f6">
+
+        <ListView
+            android:id="@+id/listview_all_city"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_f4f5f6"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0dp"
+            android:listSelector="@android:color/transparent" />
+
+        <TextView
+            android:id="@+id/tv_letter_overlay"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/cp_overlay_bg"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="48sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <com.atuan.citypicker.view.SideLetterBar
+            android:id="@+id/side_letter_bar"
+            android:layout_width="@dimen/reside_letter_bar_width"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            tools:ignore="RtlHardcoded" />
+
+        <ListView
+            android:id="@+id/listview_search_result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_f4f5f6"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0dp"
+            android:listSelector="@android:color/transparent"
+            android:visibility="gone" />
+
+        <include layout="@layout/cp_view_no_search_result" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_below="@+id/ll_current_city"
+        android:background="@drawable/cp_shade_title" />
+
+</RelativeLayout>

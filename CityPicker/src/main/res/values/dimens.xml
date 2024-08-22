@@ -1,0 +1,5 @@
+<resources>
+    <dimen name="toolbar_height">48dp</dimen>
+    <dimen name="reside_letter_bar_letter_size">12dp</dimen>
+    <dimen name="reside_letter_bar_width">24dp</dimen>
+</resources>
