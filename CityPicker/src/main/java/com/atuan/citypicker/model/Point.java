@@ -3,30 +3,36 @@ package com.atuan.citypicker.model;
 import java.io.Serializable;
 
 public class Point implements Serializable {
-    private double lat;
-    private double lon;
 
-    public double getLat() {
+    private String lat;
+    private String lng;
+
+    public Point(String lat, String lng) {
+        this.lat = lat;
+        this.lng = lng;
+    }
+
+    public String getLat() {
         return lat;
     }
 
-    public void setLat(double lat) {
+    public void setLat(String lat) {
         this.lat = lat;
     }
 
-    public double getLon() {
-        return lon;
+    public String getLng() {
+        return lng;
     }
 
-    public void setLon(double lon) {
-        this.lon = lon;
+    public void setLng(String lng) {
+        this.lng = lng;
     }
 
     @Override
     public String toString() {
         return "Point{" +
-                "lat=" + lat +
-                ", lon=" + lon +
+                "lat='" + lat + '\'' +
+                ", lng='" + lng + '\'' +
                 '}';
     }
 }

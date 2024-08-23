@@ -7,7 +7,7 @@ public class CityListBean implements Serializable {
     /**
      * code : 110000
      * name : 北京
-     * centerPoint : {"lat":39.908799,"lon":116.39741,"angle":0,"mapType":null}
+     * centerPoint : {"lat":39.908799,"lng":116.39741}
      * pinyin : beijing
      */
 
