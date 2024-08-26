@@ -27,10 +27,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         BarUtils.setStatusBarLightMode(this, true);
 
+        //示例
         String json ="[{\"firstLetter\":\"A\",\"cityList\":[{\"code\":152900,\"name\":\"阿拉善盟\",\"centerPoint\":{\"lat\":38.844814,\"lon\":105.70642},\"pinyin\":\"alashanmeng\"}]}]";
         SharedPreferencesUtils.init(this);
         SharedPreferencesUtils.saveData("Sp_Cp_Test",json);
-
         Intent intent = new Intent(MainActivity.this, CityPickerActivity.class);
         CityListBean currentCityBean = new CityListBean();
         currentCityBean.setName("北京");
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         testTV = findViewById(R.id.tv_test);
         testTV.setOnClickListener(view -> startActivityForResult(intent, 1001));
 
-        //获取 github 二次认证code
+        //与本项目无关 获取 github 二次认证code
         String hexTime = null;
         try {
             hexTime = OTP.timeInHex(System.currentTimeMillis(), 30);
