@@ -14,7 +14,7 @@ import com.atuan.citypicker.CityPickerActivity;
 import com.atuan.citypicker.model.CityListBean;
 import com.atuan.citypicker.model.Point;
 import com.atuan.citypicker.utils.BarUtils;
-import com.atuan.citypicker.utils.SharedPreferencesUtils;
+import com.atuan.citypicker.utils.CityPickerSPUtils;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
         //示例
         String json ="[{\"firstLetter\":\"A\",\"cityList\":[{\"code\":152900,\"name\":\"阿拉善盟\",\"centerPoint\":{\"lat\":38.844814,\"lon\":105.70642},\"pinyin\":\"alashanmeng\"}]}]";
-        SharedPreferencesUtils.init(this);
-        SharedPreferencesUtils.saveData("Sp_Cp_Test",json);
+        CityPickerSPUtils.init(this);
+        CityPickerSPUtils.saveData("Sp_Cp_Test",json);
         Intent intent = new Intent(MainActivity.this, CityPickerActivity.class);
         CityListBean currentCityBean = new CityListBean();
         currentCityBean.setName("北京");

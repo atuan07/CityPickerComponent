@@ -33,7 +33,7 @@ import com.atuan.citypicker.utils.ActivityHook;
 import com.atuan.citypicker.utils.BarUtils;
 import com.atuan.citypicker.utils.CityPickerMange;
 import com.atuan.citypicker.utils.LogUtil;
-import com.atuan.citypicker.utils.SharedPreferencesUtils;
+import com.atuan.citypicker.utils.CityPickerSPUtils;
 import com.atuan.citypicker.utils.Utils;
 import com.atuan.citypicker.view.SideLetterBar;
 import com.google.gson.Gson;
@@ -294,7 +294,8 @@ public class CityPickerActivity extends AppCompatActivity implements View.OnClic
         String data = "";
         List<CityPicker> cityList = null;
         if (null != currentCityListBean) {
-            data = SharedPreferencesUtils.getPersistenceString(currentCityListBean.getSP_CITY_DATA());
+            data = CityPickerSPUtils.getPersistenceString(currentCityListBean.getSP_CITY_DATA());
+            LogUtil.d("CityPickerActivity","SP-data:"+data);
         }
         if (TextUtils.isEmpty(data)) {
             StringBuilder dataSB = new StringBuilder();

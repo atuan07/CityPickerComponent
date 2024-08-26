@@ -16,7 +16,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.io.StreamCorruptedException;
 
-public class SharedPreferencesUtils {
+public class CityPickerSPUtils {
 
     public static SharedPreferences spPersistence;
     private final static String DATA_NAME = "cp_share_data";
