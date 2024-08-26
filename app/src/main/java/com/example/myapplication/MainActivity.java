@@ -6,16 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 import com.amdelamar.jotp.OTP;
 import com.amdelamar.jotp.type.Type;
 import com.atuan.citypicker.CityPickerActivity;
 import com.atuan.citypicker.model.CityListBean;
+import com.atuan.citypicker.model.Point;
 import com.atuan.citypicker.utils.BarUtils;
+import com.atuan.citypicker.utils.SharedPreferencesUtils;
 
-import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,8 +26,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BarUtils.setStatusBarLightMode(this, true);
+
+        String json ="[{\"firstLetter\":\"A\",\"cityList\":[{\"code\":152900,\"name\":\"阿拉善盟\",\"centerPoint\":{\"lat\":38.844814,\"lon\":105.70642},\"pinyin\":\"alashanmeng\"}]}]";
+        SharedPreferencesUtils.init(this);
+        SharedPreferencesUtils.saveData("Sp_Cp_Test",json);
+
+        Intent intent = new Intent(MainActivity.this, CityPickerActivity.class);
+        CityListBean currentCityBean = new CityListBean();
+        currentCityBean.setName("北京");
+        currentCityBean.setCode("110000");
+        currentCityBean.setPinyin("beijing");
+        currentCityBean.setFirst("B");
+        currentCityBean.setCenterPoint(new Point("39.908799", "116.39741"));
+        currentCityBean.setSP_CITY_DATA("Sp_Cp_Test");
+        intent.putExtra("CityListBean",currentCityBean);
         testTV = findViewById(R.id.tv_test);
-        testTV.setOnClickListener(view -> startActivityForResult(new Intent(MainActivity.this, CityPickerActivity.class), 1001));
+        testTV.setOnClickListener(view -> startActivityForResult(intent, 1001));
 
         //获取 github 二次认证code
         String hexTime = null;

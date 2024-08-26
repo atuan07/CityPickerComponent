@@ -32,7 +32,7 @@ public class SharedPreferencesUtils {
         }
     }
 
-    private static void saveData(String key, Object object) {
+    public static void saveData(String key, Object object) {
         if (object == null) {
             remove(key, spPersistence);
             return;
