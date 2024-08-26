@@ -36,31 +36,25 @@ public class CityListAdapter extends BaseAdapter {
         this.inflater = LayoutInflater.from(mContext);
     }
 
-    public void setData(List<CityListBean> mCities){
+    public void setData(List<CityListBean> mCities) {
 
-        if (mCities == null){
+        if (mCities == null) {
             mCities = new ArrayList<>();
         }
         CityListBean locationCity = new CityListBean();
         locationCity.setPinyin("0");
         locationCity.setName("定位");
-
-        CityListBean hotCity = new CityListBean();
-        locationCity.setPinyin("1");
-        locationCity.setName("热门");
-
         mCities.add(0, locationCity);
-        //mCities.add(1, hotCity);
         int size = mCities.size();
         this.mCities = mCities;
         letterIndexes = new HashMap<>();
         sections = new String[size];
-        for (int index = 0; index < size; index++){
+        for (int index = 0; index < size; index++) {
             //当前城市拼音首字母
             String currentLetter = PinyinUtils.getFirstLetter(mCities.get(index).getPinyin());
             //上个首字母，如果不存在设为""
             String previousLetter = index >= 1 ? PinyinUtils.getFirstLetter(mCities.get(index - 1).getPinyin()) : "";
-            if (!TextUtils.equals(currentLetter, previousLetter)){
+            if (!TextUtils.equals(currentLetter, previousLetter)) {
                 letterIndexes.put(currentLetter, index);
                 sections[index] = currentLetter;
             }
@@ -69,9 +63,10 @@ public class CityListAdapter extends BaseAdapter {
 
     /**
      * 更新定位状态
+     *
      * @param state
      */
-    public void updateLocateState(int state, String city){
+    public void updateLocateState(int state, String city) {
         this.locateState = state;
         this.locatedCity = city;
         notifyDataSetChanged();
@@ -79,10 +74,11 @@ public class CityListAdapter extends BaseAdapter {
 
     /**
      * 获取字母索引的位置
+     *
      * @param letter
      * @return
      */
-    public int getLetterPosition(String letter){
+    public int getLetterPosition(String letter) {
         Integer integer = letterIndexes.get(letter);
         return integer == null ? -1 : integer;
     }
@@ -99,7 +95,7 @@ public class CityListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return mCities == null ? 0: mCities.size();
+        return mCities == null ? 0 : mCities.size();
     }
 
     @Override
@@ -116,12 +112,12 @@ public class CityListAdapter extends BaseAdapter {
     public View getView(final int position, View view, ViewGroup parent) {
         CityViewHolder holder;
         int viewType = getItemViewType(position);
-        switch (viewType){
-            case 0:     //定位
+        switch (viewType) {
+            case 0://定位
                 view = inflater.inflate(R.layout.cp_view_locate_city, parent, false);
                 ViewGroup container = (ViewGroup) view.findViewById(R.id.layout_locate);
                 TextView state = (TextView) view.findViewById(R.id.tv_located_city);
-                switch (locateState){
+                switch (locateState) {
                     case LocateState.LOCATING:
                         state.setText(mContext.getString(R.string.cp_locating));
                         break;
@@ -134,65 +130,35 @@ public class CityListAdapter extends BaseAdapter {
                     default:
                         break;
                 }
-//                container.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        if (locateState == LocateState.FAILED){
-//                            //重新定位
-//                            if (onCityClickListener != null){
-//                                onCityClickListener.onLocateClick();
-//                            }
-//                        }else if (locateState == LocateState.SUCCESS){
-//                            //返回定位城市
-//                            if (onCityClickListener != null){
-//                                onCityClickListener.onCityClick(locatedCity);
-//                            }
-//                        }
-//                    }
-//                });
                 break;
-//            case 1:     //热门
-//                view = inflater.inflate(R.layout.wscp_view_hot_city, parent, false);
-//                WrapHeightGridView gridView = (WrapHeightGridView) view.findViewById(R.id.gridview_hot_city);
-//                final HotCityGridAdapter hotCityGridAdapter = new HotCityGridAdapter(mContext);
-//                gridView.setAdapter(hotCityGridAdapter);
-//                gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                        if (onCityClickListener != null){
-//                            onCityClickListener.onCityClick(hotCityGridAdapter.getItem(position));
-//                        }
-//                    }
-//                });
-//                break;
-            case 1:     //所有
-                if (view == null){
+            case 1://所有
+                if (view == null) {
                     view = inflater.inflate(R.layout.cp_item_city_listview, parent, false);
                     holder = new CityViewHolder();
                     holder.letter = (TextView) view.findViewById(R.id.tv_item_city_listview_letter);
                     holder.name = (TextView) view.findViewById(R.id.tv_item_city_listview_name);
                     holder.line = view.findViewById(R.id.view_line);
                     view.setTag(holder);
-                }else{
+                } else {
                     holder = (CityViewHolder) view.getTag();
                 }
-                if (position >= 1){
+                if (position >= 1) {
                     final String city = mCities.get(position).getName();
                     holder.name.setText(city);
                     String currentLetter = PinyinUtils.getFirstLetter(mCities.get(position).getPinyin());
                     String previousLetter = position >= 1 ? PinyinUtils.getFirstLetter(mCities.get(position - 1).getPinyin()) : "";
-                    if (!TextUtils.equals(currentLetter, previousLetter)){
+                    if (!TextUtils.equals(currentLetter, previousLetter)) {
                         holder.letter.setVisibility(View.VISIBLE);
                         holder.line.setVisibility(View.GONE);
                         holder.letter.setText(currentLetter);
-                    }else{
+                    } else {
                         holder.letter.setVisibility(View.GONE);
                         holder.line.setVisibility(View.VISIBLE);
                     }
                     holder.name.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if (onCityClickListener != null){
+                            if (onCityClickListener != null) {
                                 onCityClickListener.onCityClick(mCities.get(position));
                             }
                         }
@@ -205,26 +171,28 @@ public class CityListAdapter extends BaseAdapter {
         return view;
     }
 
-    public static class CityViewHolder{
+    public static class CityViewHolder {
         TextView letter;
         TextView name;
         View line;
     }
 
-    public void setOnCityClickListener(OnCityClickListener listener){
+    public void setOnCityClickListener(OnCityClickListener listener) {
         this.onCityClickListener = listener;
     }
 
-    public interface OnCityClickListener{
+    public interface OnCityClickListener {
         /**
          * 确定选中的是哪个城市
-         * @param cityListBean  listview当前点击的城市msg
+         *
+         * @param cityListBean listview当前点击的城市msg
          * @createAuthor Lee
          */
         void onCityClick(CityListBean cityListBean);
 
         /**
          * 定位城市 状态都为LocateState.LOCATING，调不到这个方法
+         *
          * @createAuthor Lee
          */
         void onLocateClick();

@@ -38,7 +38,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(path: ':CityPicker')
     implementation 'com.amdelamar:jotp:1.3.0'
+
+//    implementation project(path: ':CityPicker')
+
+    implementation 'com.github.atuan07:CityPickerComponent:1.0.1'
 
 }
